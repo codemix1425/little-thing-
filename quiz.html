@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jojo Test</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #e1bee7, #d1c4e9);
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #7b1fa2;
+            font-size: 3em;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 1.5em;
+        }
+        .button {
+            background-color: #673ab7;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #5e35b1;
+        }
+        .results {
+            margin-top: -20px; /* Adjust this value to move it up */
+            font-size: 1.5em;
+            color: #4a148c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Testing The Best Girl</h1>
+    <div id="quizContainer">
+        <div class="question" id="question">What is the most beautiful moment?</div>
+        <button class="button" onclick="answer('Drinking Coffee')">Drinking Coffee</button>
+        <button class="button" onclick="answer('Outdoor Adventure')">Outdoor Adventure</button>
+        <button class="button" onclick="answer('Movie Night')">Movie Night</button>
+        <button class="button" onclick="answer('Cooking Together')">Cooking Together</button>
+    </div>
+    <div class="results" id="results"></div>
+    <a class="button" href="index.html">Back to Home</a>
+
+    <script>
+        const questions = [
+            { text: "What is the most beautiful moment?", options: ['Drinking Coffee', 'Outdoor Adventure', 'Movie Night', 'Cooking Together'] },
+            { text: 'What’s better?', options: ['Regular Messages', 'Paper Messages'] },
+            { text: 'Where does Sohaib live?', options: ['Zaydie', 'Shoqiya', 'Awali', 'Wali Alahd'] },
+            { text: 'What kind of music do you enjoy listening to with Sohaib?', options: ['Fayrouz', 'Everything', 'Abadi alJohar', 'Rashed almaJed'] },
+            { text: 'Is the strange beautiful?', options: ['Yes', 'No'] },
+            { text: 'Do you think you will forget me?', options: ['IDK', 'Yes', 'No'] },
+            { text: 'Do you think our relationship is special?', options: ['A lot', 'A little bit'] },
+            { text: 'Do you think I will forget you?', options: ['You won\'t', 'You won\'t', 'Sure you won\'t, hhhh'] }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                document.getElementById('question').innerText = questions[currentQuestionIndex].text;
+                const buttons = document.querySelectorAll('.button');
+                buttons.forEach((button, index) => {
+                    button.innerText = questions[currentQuestionIndex].options[index] || '';
+                    button.style.display = questions[currentQuestionIndex].options[index] ? 'inline-block' : 'none';
+                });
+            } else {
+                showResults();
+            }
+        }
+
+        function answer(selectedOption) {
+            score++;
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            document.getElementById('quizContainer').style.display = 'none';
+            const results = document.getElementById('results');
+            results.innerText = `Thank you for letting me know Jana! You scored ${score} out of ${questions.length}. I think you love me a little bit maybe hhhhh! 
+            And by the way, this game is not real and I will not see your answers, so you will get the full mark anyway because you're always the best.`;
+            results.innerHTML += `<br><a class="button" href="qr.html">The Last thing</a>`; // Link to QR code
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>
